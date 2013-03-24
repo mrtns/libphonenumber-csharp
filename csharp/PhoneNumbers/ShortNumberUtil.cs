@@ -98,5 +98,14 @@ namespace PhoneNumbers
                 : emergencyNumberPattern.MatchBeginning(normalizedNumber).Success;
 
         }
+
+        public bool IsShortcodeNumber(string number, string regionCode) {
+            var phoneMetadataForRegion = phoneUtil.GetMetadataForRegion(regionCode);
+            if (phoneMetadataForRegion == null) {
+                return false;
+            }
+
+            throw new NotImplementedException();
+        }
     }
 }
