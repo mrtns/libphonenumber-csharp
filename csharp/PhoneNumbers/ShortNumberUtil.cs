@@ -21,8 +21,7 @@ using System.Text;
 namespace PhoneNumbers
 {
     /*
-    * Utility for international short phone numbers, such as short codes and emergency numbers. Note
-    * most commercial short numbers are not handled here, but by the PhoneNumberUtil.
+    * Utility for short phone numbers, such as short codes and emergency numbers.
     *
     * @author Shaopeng Jia
     */
@@ -99,13 +98,31 @@ namespace PhoneNumbers
 
         }
 
+        /**
+        * Returns true if the number matches the short code number format for the given region.
+        *
+        * This method takes into account cases where the number might contain formatting, but doesn't
+        * allow additional digits to be appended.
+        *
+        * @param number  the phone number to test
+        * @param regionCode  the region where the phone number is being dialed
+        * @return  if the number matches the short code number format for the given region.
+        */
         public bool IsShortcodeNumber(string number, string regionCode) {
+
             var phoneMetadataForRegion = phoneUtil.GetMetadataForRegion(regionCode);
-            if (phoneMetadataForRegion == null) {
+            if (phoneMetadataForRegion == null || !phoneMetadataForRegion.HasShortCode) {
+                // NOTE: We should also probably do this when phoneMetadataForRegion.ShortCode.NationalNumberPattern.Equals("NA")
+                // I think there is a bug where PhoneNumbers.BuildMetadataFromXml.LoadGeneralDesc always calls metadata.SetShortCode(),
+                // which always sets HasShortCode to true, even in the cases where PhoneNumbers.BuildMetadataFromXml.ProcessPhoneNumberDescElement 
+                // returns "NA" (which happens when the territory in PhoneNumberMetaData.xml does not contain a shortCode definition/node)
                 return false;
             }
 
-            throw new NotImplementedException();
+            var shortCodeNumberPattern = new PhoneRegex(phoneMetadataForRegion.ShortCode.NationalNumberPattern);
+            var normalizedNumber = PhoneNumberUtil.NormalizeDigitsOnly(number);
+
+            return shortCodeNumberPattern.MatchAll(normalizedNumber).Success;
         }
     }
 }

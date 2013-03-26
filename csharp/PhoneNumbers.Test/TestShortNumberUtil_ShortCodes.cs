@@ -5,11 +5,13 @@ namespace PhoneNumbers.Test.TestShortNumberUtil_ShortCodes
     public class GivenAShortNumberUtil
     {
         protected ShortNumberUtil _sut;
+        protected PhoneNumberUtil _phoneNumberUtil;
 
         [SetUp]
         public void Given() {
             PhoneNumberUtil.ResetInstance();
-            _sut = new ShortNumberUtil(PhoneNumberUtil.GetInstance());
+            _phoneNumberUtil = PhoneNumberUtil.GetInstance();
+            _sut = new ShortNumberUtil(_phoneNumberUtil);
         }
     }
 
@@ -22,7 +24,13 @@ namespace PhoneNumbers.Test.TestShortNumberUtil_ShortCodes
 
         [Test]
         public void ItShouldReturnFalseForValidRegionCodeThatDoesNotHaveShortcodeMetadataDefined() {
-            const string aValidRegionCodeThatDoesNotHaveShortcodeMetadataDefined = "";
+
+            const string aValidRegionCodeThatDoesNotHaveShortcodeMetadataDefined = "AD";
+
+            // Validate precondition; verify that AD really does not support short code (in case this changes in the future)
+            var aValidRegionThatDoesNotHaveShortcodeMetataDefined = _phoneNumberUtil.GetMetadataForRegion(aValidRegionCodeThatDoesNotHaveShortcodeMetadataDefined);
+            Assert.That(aValidRegionThatDoesNotHaveShortcodeMetataDefined.ShortCode.NationalNumberPattern, Is.EqualTo("NA"), "Precondition failed. PhoneNumberUtil.GetMetadataForRegion(\"AD\").ShortCode.NationalNumberPattern should not be \"NA\".");
+
             Assert.That(_sut.IsShortcodeNumber("some number", aValidRegionCodeThatDoesNotHaveShortcodeMetadataDefined), Is.False);
         }
 
