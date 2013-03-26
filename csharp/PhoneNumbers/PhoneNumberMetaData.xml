@@ -38,6 +38,9 @@
 
      Emergency numbers Wikipedia source:
      http://en.wikipedia.org/wiki/Emergency_telephone_number
+     
+     Shortcode numbers Wikipedia source:
+     http://en.wikipedia.org/wiki/Short_code
 -->
 
 <!DOCTYPE phoneNumberMetadata [
@@ -3764,6 +3767,11 @@
         <possibleNumberPattern>\d{10}</possibleNumberPattern>
         <exampleNumber>5002345678</exampleNumber>
       </personalNumber>
+      <shortCode>
+        <nationalNumberPattern>\d{5,6}</nationalNumberPattern>
+        <possibleNumberPattern>\d{5,6}</possibleNumberPattern>
+        <exampleNumber>12345</exampleNumber>
+      </shortCode>
       <emergency>
         <nationalNumberPattern>
           112|
@@ -23118,6 +23126,11 @@
         <possibleNumberPattern>\d{10}</possibleNumberPattern>
         <exampleNumber>5002345678</exampleNumber>
       </personalNumber>
+      <shortCode>
+        <nationalNumberPattern>\d{5,6}</nationalNumberPattern>
+        <possibleNumberPattern>\d{5,6}</possibleNumberPattern>
+        <exampleNumber>12345</exampleNumber>
+      </shortCode>
       <emergency>
         <nationalNumberPattern>
           112|
