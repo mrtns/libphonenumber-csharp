@@ -678,7 +678,19 @@ namespace PhoneNumbers {
     public global::PhoneNumbers.PhoneNumberDesc Voicemail {
       get { return voicemail_; }
     }
-    
+
+    public const int ShortCodeFieldNumber = 29;
+    private bool hasShortCode;
+    private global::PhoneNumbers.PhoneNumberDesc shortCode_ = global::PhoneNumbers.PhoneNumberDesc.DefaultInstance;
+    public bool HasShortCode
+    {
+        get { return hasShortCode; }
+    }
+    public global::PhoneNumbers.PhoneNumberDesc ShortCode
+    {
+        get { return shortCode_; }
+    }
+
     public const int NoInternationalDiallingFieldNumber = 24;
     private bool hasNoInternationalDialling;
     private global::PhoneNumbers.PhoneNumberDesc noInternationalDialling_ = global::PhoneNumbers.PhoneNumberDesc.DefaultInstance;
@@ -846,6 +858,7 @@ namespace PhoneNumbers {
         if (!hasPager) return false;
         if (!hasUan) return false;
         if (!hasEmergency) return false;
+        if (!hasShortCode) return false;
         if (!hasVoicemail) return false;
         if (!hasNoInternationalDialling) return false;
         if (!hasId) return false;
@@ -878,6 +891,7 @@ namespace PhoneNumbers {
       if (hasPager) hash ^= pager_.GetHashCode();
       if (hasUan) hash ^= uan_.GetHashCode();
       if (hasEmergency) hash ^= emergency_.GetHashCode();
+      if (hasShortCode) hash ^= shortCode_.GetHashCode();
       if (hasVoicemail) hash ^= voicemail_.GetHashCode();
       if (hasNoInternationalDialling) hash ^= noInternationalDialling_.GetHashCode();
       if (hasId) hash ^= id_.GetHashCode();
@@ -913,6 +927,7 @@ namespace PhoneNumbers {
       if (hasPager != other.hasPager || (hasPager && !pager_.Equals(other.pager_))) return false;
       if (hasUan != other.hasUan || (hasUan && !uan_.Equals(other.uan_))) return false;
       if (hasEmergency != other.hasEmergency || (hasEmergency && !emergency_.Equals(other.emergency_))) return false;
+      if (hasShortCode != other.hasShortCode || (hasShortCode && !shortCode_.Equals(other.shortCode_))) return false;
       if (hasVoicemail != other.hasVoicemail || (hasVoicemail && !voicemail_.Equals(other.voicemail_))) return false;
       if (hasNoInternationalDialling != other.hasNoInternationalDialling || (hasNoInternationalDialling && !noInternationalDialling_.Equals(other.noInternationalDialling_))) return false;
       if (hasId != other.hasId || (hasId && !id_.Equals(other.id_))) return false;
@@ -1021,6 +1036,9 @@ namespace PhoneNumbers {
         }
         if (other.HasEmergency) {
           MergeEmergency(other.Emergency);
+        }
+        if (other.HasShortCode) {
+          MergeShortCode(other.ShortCode);
         }
         if (other.HasVoicemail) {
           MergeVoicemail(other.Voicemail);
@@ -1471,6 +1489,52 @@ namespace PhoneNumbers {
         result.emergency_ = global::PhoneNumbers.PhoneNumberDesc.DefaultInstance;
         return this;
       }
+
+      public bool HasShortCode
+      {
+          get { return result.HasShortCode; }
+      }
+      public global::PhoneNumbers.PhoneNumberDesc ShortCode
+      {
+          get { return result.ShortCode; }
+          set { SetShortCode(value); }
+      }
+      public Builder SetShortCode(global::PhoneNumbers.PhoneNumberDesc value)
+      {
+          if (value == null) throw new global::System.ArgumentNullException("value");
+          result.hasShortCode = true;
+          result.shortCode_ = value;
+          return this;
+      }
+      public Builder SetShortCode(global::PhoneNumbers.PhoneNumberDesc.Builder builderForValue)
+      {
+          if (builderForValue == null) throw new global::System.ArgumentNullException("builderForValue");
+          result.hasShortCode = true;
+          result.shortCode_ = builderForValue.Build();
+          return this;
+      }
+      public Builder MergeShortCode(global::PhoneNumbers.PhoneNumberDesc value)
+      {
+          if (value == null) throw new global::System.ArgumentNullException("value");
+          if (result.HasShortCode &&
+              result.shortCode_ != global::PhoneNumbers.PhoneNumberDesc.DefaultInstance)
+          {
+              result.shortCode_ = global::PhoneNumbers.PhoneNumberDesc.CreateBuilder(result.shortCode_).MergeFrom(value).BuildPartial();
+          }
+          else
+          {
+              result.shortCode_ = value;
+          }
+          result.hasShortCode = true;
+          return this;
+      }
+      public Builder ClearShortCode()
+      {
+          result.hasShortCode = false;
+          result.shortCode_ = global::PhoneNumbers.PhoneNumberDesc.DefaultInstance;
+          return this;
+      }
+
       
       public bool HasVoicemail {
        get { return result.HasVoicemail; }
