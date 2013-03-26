@@ -537,6 +537,7 @@ namespace PhoneNumbers.Test
             Assert.AreEqual("\\d{7}", metadata.PersonalNumber.NationalNumberPattern);
             Assert.AreEqual("\\d{8}", metadata.Voip.NationalNumberPattern);
             Assert.AreEqual("\\d{9}", metadata.Uan.NationalNumberPattern);
+            Assert.AreEqual("\\d{10}", metadata.ShortCode.NationalNumberPattern);
         }
     }
 }
