@@ -1,3 +1,5 @@
+# Overview
+
 # libphonenumber-csharp
 
 Cloned from [https://bitbucket.org/pmezard/libphonenumber-csharp](https://bitbucket.org/pmezard/libphonenumber-csharp) branch 'csharp'
@@ -11,17 +13,13 @@ Cloned from [https://bitbucket.org/pmezard/libphonenumber-csharp](https://bitbuc
 
 > Google's common Java, C++ and Javascript library for parsing, formatting, storing and validating international phone numbers. The Java version is optimized for running on smartphones, and is used by the Android framework since 4.0 (Ice Cream Sandwich).
 
-# branches
+# Changes
 
-## master
-
-Clone of libphonenumber-csharp branch 'csharp'
-
-## shortcode_support
+## Shortcode Support
 
 libphonenumber currently officially does not support shortcodes.
 
-The feature is in the works, however:
+The feature is in the works, however, based on a [thread in libphonenumber-discuss](https://groups.google.com/d/msg/libphonenumber-discuss/Fm4kN-TmxSQ/sOLODFRyO5QJ):
 
 > From: Shaopeng <jia.shao.p...@gmail.com>
 > To: "libphonenumber-discuss@googlegroups.com" <libphonenumber-discuss@googlegroups.com>
@@ -36,15 +34,19 @@ The feature is in the works, however:
 > 
 > Shaopeng
 
-(Source: [https://groups.google.com/d/msg/libphonenumber-discuss/Fm4kN-TmxSQ/sOLODFRyO5QJ](https://groups.google.com/d/msg/libphonenumber-discuss/Fm4kN-TmxSQ/sOLODFRyO5QJ))
 
-This branch adds shortcode support, until there is an official implementation.
+We have added unofficial (read: ghetto hack) shortcode support, until there is an official implementation.
+
+Implementation notes:
+
+* Exists only in the csharp fork. No effort will be spent on porting it to the other supported platforms
+* Depends on the existence of the shortcode data definitions in PhoneNumberMetaData (in the territory/shortCode node for each territory). Currently that data is sparse.
+* Added shortCode definitions for US and CA territories, however, these definitions might need to be made more comprehensive (e.g. not matching numbers with certain prefixes)
 
 References:
 
-* [https://groups.google.com/forum/?fromgroups=#!topic/libphonenumber-discuss/Fm4kN-TmxSQ](https://groups.google.com/forum/?fromgroups=#!topic/libphonenumber-discuss/Fm4kN-TmxSQ)
+* [libphonenumber-discuss thread on shortcode support](https://groups.google.com/forum/?fromgroups=#!topic/libphonenumber-discuss/Fm4kN-TmxSQ)
 
-# To Do
+## To Do
 
-* Add support for shortcodes
 * Update libphonenumber-csharp (currently at r515) with latest libphonenumber release (v5.4 r561)
