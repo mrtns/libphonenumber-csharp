@@ -58,6 +58,7 @@ namespace PhoneNumbers
         private static readonly String PREFERRED_INTERNATIONAL_PREFIX = "preferredInternationalPrefix";
         private static readonly String PREMIUM_RATE = "premiumRate";
         private static readonly String SHARED_COST = "sharedCost";
+        private static readonly String SHORT_CODE = "shortCode";
         private static readonly String TOLL_FREE = "tollFree";
         private static readonly String UAN = "uan";
         private static readonly String VOICEMAIL = "voicemail";
@@ -445,6 +446,7 @@ namespace PhoneNumbers
             metadata.SetUan(ProcessPhoneNumberDescElement(generalDesc, element, UAN, liteBuild));
             metadata.SetVoicemail(ProcessPhoneNumberDescElement(generalDesc, element, VOICEMAIL, liteBuild));
             metadata.SetEmergency(ProcessPhoneNumberDescElement(generalDesc, element, EMERGENCY, liteBuild));
+            metadata.SetShortCode(ProcessPhoneNumberDescElement(generalDesc, element, SHORT_CODE, liteBuild));
             metadata.SetNoInternationalDialling(ProcessPhoneNumberDescElement(generalDesc, element,
                                                                               NO_INTERNATIONAL_DIALLING, liteBuild));
             metadata.SetSameMobileAndFixedLinePattern(
